@@ -1,0 +1,7 @@
+const CharActionTypes = {
+    FETCH_CHARS_START: 'FETCH_CHARS_START',
+    FETCH_CHARS_SUCCESS: 'FETCH_CHARS_SUCCESS',
+    FETCH_CHARS_FAILURE: 'FETCH_CHARS_FAILURE'
+  };
+  
+  export default CharActionTypes;

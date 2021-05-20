@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom';
 import i18next from "i18next"
 import './index.css';
 import App from './App';
-import { store } from './app/store';
+import { store } from './redux/store';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router-dom';
 import {I18nextProvider} from "react-i18next"
 import * as serviceWorker from './serviceWorker';
-import history from './app/history';
+import history from './redux/history';
 
 import common_es from "./i18n/es.json"
 import common_en from "./i18n/en.json"

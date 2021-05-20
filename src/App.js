@@ -1,18 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import styles from './app.modules.scss';
-import { Router, Switch } from 'react-router';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import styles from './app.module.scss';
+import { Route, Switch } from 'react-router';
+import {getCharInfo} from './redux/characters/actions'
 
 export const App = () => {
+  const dispatch = useDispatch();
+  const chars = useSelector(state => state.characters);
+
+  useEffect(() =>{
+    dispatch(getCharInfo())
+  },[])
+  
   return (
     <div className={styles.mainRoot}>
       <Switch>
-        <Route path={`/${}/characters`}>
-
+        <Route path={`/`}>
+          <div>CHARACTERS</div>
+          {/* <button onClick={() => dispatch(getCharInfo())}>
+        Getdata
+      </button> */}
         </Route>
-        <Route path={`/${}/characters/details`}>
-          
+        <Route path={`/characters/details`}>
+        <div>DETAILS</div>
         </Route>
       </Switch>
     </div>
@@ -20,3 +30,5 @@ export const App = () => {
 }
 
 export default App;
+
+
