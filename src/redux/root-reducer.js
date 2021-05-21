@@ -4,7 +4,7 @@ import charReducer from './characters/reducers';
 
 
 const rootReducer = combineReducers({
-  character: charReducer,
+  data: charReducer,
 });
 
 export default rootReducer;

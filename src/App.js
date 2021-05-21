@@ -1,28 +1,20 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
 import styles from './app.module.scss';
 import { Route, Switch } from 'react-router';
-import {getCharInfo} from './redux/characters/actions'
+import CharList from './views/charList/charList'
+import CharDetail from './views/charDetail/charDetail'
+
 
 export const App = () => {
-  const dispatch = useDispatch();
-  const chars = useSelector(state => state.characters);
 
-  useEffect(() =>{
-    dispatch(getCharInfo())
-  },[])
-  
   return (
     <div className={styles.mainRoot}>
       <Switch>
-        <Route path={`/`}>
-          <div>CHARACTERS</div>
-          {/* <button onClick={() => dispatch(getCharInfo())}>
-        Getdata
-      </button> */}
+        <Route path={`/characters/:id/details`}>
+        <CharDetail/>
         </Route>
-        <Route path={`/characters/details`}>
-        <div>DETAILS</div>
+        <Route path={`/`}>
+          <CharList/>
         </Route>
       </Switch>
     </div>

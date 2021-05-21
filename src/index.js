@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import i18next from "i18next"
 import './index.css';
 import App from './App';
-import { store } from './redux/store';
+import store from './redux/store';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router-dom';
 import {I18nextProvider} from "react-i18next"

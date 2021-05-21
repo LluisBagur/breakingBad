@@ -1,62 +1,31 @@
-import { takeLatest, call, put, all } from "redux-saga/effects";
-import { loadCharsInfo } from "../../api/charsInfo";
-// import { getCharInfo, getCharInfoOK, getCharInfoKO } from "./actions";
-import CharActionTypes from "./types";
+import { takeLatest, call, put } from "redux-saga/effects";
+// import { loadCharsInfo } from "../../api/charsInfo";
 
-export function* fetchCharInfo() {
-  console.log("LOCO")
+let baseUrl = "https://www.breakingbadapi.com/api/characters";
+
+function getApi() {
+  console.log('im in')
+  return fetch(baseUrl, {
+    method: 'GET',
+    headers: {
+      'Content-type': 'application/json',
+    }
+  }).then(response => response.json())
+    .catch((error) => {throw error})
+}
+
+export function* fetchCharInfo(action) {
+  console.log("into saga");
   try {
-    const charInfo = yield call(loadCharsInfo);
-    console.log(charInfo, 'pepe')
-    yield put({type:'FETCH_CHARS_SUCCESS', characters: charInfo})
+    const charInfo = yield call(getApi);
+    yield put({ type: "FETCH_CHARS_SUCCESS", characters: charInfo });
   } catch (error) {
-    yield put({type:'FETCH_CHARS_FAILED', errorMessage: error.message})
+    yield put({ type: "FETCH_CHARS_FAILED", errorMessage: error.message });
   }
 }
 
 function* characterSagas() {
-  console.log("PEPILLO")
+  console.log("lelo")
   yield takeLatest('FETCH_CHAR_START', fetchCharInfo);
 }
 export default characterSagas;
-// export function* characterSagas() {
-//   yield all([call(onFetchCharacterStart)]);
-// }
-
-
-
-// import { takeLatest, call, put, all } from 'redux-saga/effects';
-
-// import {
-//   firestore,
-//   convertCollectionsSnapshotToMap,
-// } from '../../firebase/firebase.utils';
-
-// import {
-//   fetchCollectionsSuccess,
-//   fetchCollectionsFailure,
-// } from './shop.actions';
-
-// import ShopActionTypes from './shop.types';
-
-// export function* fetchCollections() {
-//   try {
-//     const collectionRef = firestore.collection('collections');
-//     const snapshot = yield collectionRef.get();
-//     const collectionsMap = yield call(
-//       convertCollectionsSnapshotToMap,
-//       snapshot,
-//     );
-//     yield put(fetchCollectionsSuccess(collectionsMap));
-//   } catch (error) {
-//     yield put(fetchCollectionsFailure(error.message));
-//   }
-// }
-
-// export function* onFetchCollectionsStart() {
-//   yield takeLatest(ShopActionTypes.FETCH_COLLECTIONS_START, fetchCollections);
-// }
-
-// export function* shopSagas() {
-//   yield all([call(onFetchCollectionsStart)]);
-// }
