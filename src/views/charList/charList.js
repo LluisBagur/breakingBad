@@ -1,44 +1,44 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import Layout from "../../components/layout/layout";
-import {useSelector, useDispatch } from 'react-redux';
-// import {getCharInfo} from '../../redux/characters/actions';
-import Card from "../../components/card/card";
-import styles from './charList.module.scss'
-
+import {
+  selectIsLoading,
+  selectAllCharInfo,
+} from "../../redux/characters/selectors";
 import { getCharInfo } from "../../redux/characters/actions";
+import Layout from "../../components/layout/layout";
+import Loading from "../../components/Loading/Loading";
+import Card from "../../components/card/card";
+import styles from "./charList.module.scss";
 
-const CharList = ({ fetchCharacterStart, collection }) => {
-  const dispatch = useDispatch();
-  const characters = useSelector(state => state.data.characters)
-  const loading = useSelector(state => state.data.loading)
-  const errors = useSelector(state => state.data.errors)
-
-
+export const CharList = ({ fetchCharacter, characters, loading }) => {
   useEffect(() => {
-    dispatch(getCharInfo());
-  }, []);
-  console.log(characters)
+    fetchCharacter();
+  }, [fetchCharacter]);
 
   return (
     <Layout>
-      {/* {loa} */}
-      {characters.map((item) =>(
-        <Card item={item} />
-        // <div className={styles.item}>{i.name}</div>
-      ))}
+      <div className={styles.mainContainer}>
+        {loading ? (
+          <Loading />
+        ) : (
+          <>
+            {characters.map((item) => (
+              <Card item={item} key={item.char_id}/>
+            ))}
+          </>
+        )}
+      </div>
     </Layout>
   );
 };
 
-export default CharList;
+const mapStateToProps = (state) => ({
+  characters: selectAllCharInfo(state),
+  loading: selectIsLoading(state),
+});
 
-// const mapStateToProps = (state) => ({
-//   collection: state.data.characters,
-// });
+const mapDispatchToProps = (dispatch) => ({
+  fetchCharacter: () => dispatch(getCharInfo()),
+});
 
-// const mapDispatchToProps = (dispatch) => ({
-//   fetchCharacterStart: () => dispatch(getCharInfo()),
-// });
-
-// export default connect(mapStateToProps, mapDispatchToProps)(CharList);
+export default connect(mapStateToProps, mapDispatchToProps)(CharList);

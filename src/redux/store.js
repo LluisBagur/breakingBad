@@ -1,15 +1,22 @@
-import {createStore, compose, applyMiddleware } from 'redux';
-import createSagaMiddleware from 'redux-saga'
+import { applyMiddleware, createStore } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import { createBrowserHistory } from 'history';
+import createSagaMiddleware from 'redux-saga';
+import storeProvider from './storeProvider';
+import createRootReducer from './root-reducer';
 import rootSaga from './root-saga';
-import rootReducer from './root-reducer';
+export const history = createBrowserHistory();
 
-//create saga middleware
 const sagaMiddleware = createSagaMiddleware();
+const middleware = [sagaMiddleware];
 
-const store = compose(
-  applyMiddleware(sagaMiddleware),
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),  
-)(createStore)(rootReducer);
+const store = createStore(
+  createRootReducer(),
+  composeWithDevTools(applyMiddleware(...middleware))
+);
 
-sagaMiddleware.run(rootSaga)
-export default store;
+sagaMiddleware.run(rootSaga);
+
+storeProvider.init(store);
+
+export default storeProvider.getStore();

@@ -1,1 +1,8 @@
-{"test":"test"}
+{
+    "Alias: ": "Nickname: ",
+    "Cumpleaños: ": "BirthDay: ",
+    "Aparece en la temporadas: ": "Appears in the seasons: ",
+    "Representado por: ": "Represented by: ",
+    "Frase celebre:": "Quote:",
+    "No se han encontrado fases celebres": "No quotes found"
+}

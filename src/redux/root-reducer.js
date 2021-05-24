@@ -1,10 +1,13 @@
 
 import { combineReducers } from 'redux';
 import charReducer from './characters/reducers';
+import quoteReducer from './quote/reducers';
 
+const createRootReducer = () =>
+  combineReducers({
+    data: charReducer,
+    quote: quoteReducer,
+    
+  });
 
-const rootReducer = combineReducers({
-  data: charReducer,
-});
-
-export default rootReducer;
+export default createRootReducer;

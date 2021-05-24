@@ -1,18 +1,23 @@
 import React from 'react';
-import styles from './app.module.scss';
-import { Route, Switch } from 'react-router';
+import { Route, Switch, Redirect } from 'react-router';
+import { connect } from "react-redux";
 import CharList from './views/charList/charList'
 import CharDetail from './views/charDetail/charDetail'
+import styles from './app.module.scss';
 
 
-export const App = () => {
+export const App = ({haveInfo}) => {
 
   return (
     <div className={styles.mainRoot}>
       <Switch>
-        <Route path={`/characters/:id/details`}>
-        <CharDetail/>
-        </Route>
+        <Route
+          exact
+          path={`/characters/:id/details`}
+          render={() =>
+            haveInfo.length <= 0 ? <Redirect to="/" /> : <CharDetail />
+          }
+        />
         <Route path={`/`}>
           <CharList/>
         </Route>
@@ -21,6 +26,10 @@ export const App = () => {
   );
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+  haveInfo: state.data.characters,
+});
+
+export default connect(mapStateToProps)(App);
 
 

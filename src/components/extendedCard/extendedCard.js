@@ -1,18 +1,57 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import Loading from "../Loading/Loading";
 import styles from "./extendedCard.module.scss";
 
-const ExtendedCard = ({ item }) => {
-  console.log({ item });
+const ExtendedCard = ({ item, quote, loading }) => {
+  const [t] = useTranslation("common");
   return (
     <div className={styles.main}>
-        <img src={item.img} className={styles.img} />
+      <img src={item.img} className={styles.img} alt="character" />
       <div className={styles.column}>
-        <div className={styles.name}>{item.name}</div>
-        <div className={styles.portrayed}>{item.portrayed}</div>
-        <div className={styles.birthday}>{item.birthday}</div>
-        <div className={styles.appearance}>{item.appearance}</div>
-        <div className={styles.name}>{item.name}</div>
+        <div className={styles.title}>{item.name}</div>
+        <div className={styles.item}>
+          <p>
+            {t("Alias: ")}
+            {item.nickname}
+          </p>
+        </div>
+        <div className={styles.item}>
+          <p>
+            {t("Cumpleaños: ")}
+            {item.birthday}
+          </p>
+        </div>
+        <div className={styles.item}>
+          <p>
+            {t("Aparece en la temporadas: ")}
+            {item.appearance.join(", ")}
+          </p>
+        </div>
+        <div className={styles.item}>
+          <p>
+            {t("Representado por: ")}
+            {item.portrayed}
+          </p>
+        </div>
+        <div className={styles.item}>
+          <p>{t("Frase celebre:")}</p>
+        </div>
+        {loading ? (
+          <Loading loadingPoint/>
+        ) : (
+          <>
+            {quote.length ? (
+              <div className={styles.quote}>
+                <p>{quote}</p>
+              </div>
+            ) : (
+              <p className={styles.itemError}>
+                {t("No se han encontrado fases celebres")}
+              </p>
+            )}
+          </>
+        )}
       </div>
     </div>
   );

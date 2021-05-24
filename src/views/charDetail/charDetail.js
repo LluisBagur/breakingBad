@@ -3,28 +3,31 @@ import { connect } from "react-redux";
 import { useParams } from 'react-router-dom';
 import Layout from "../../components/layout/layout";
 import { selectInfoCharById } from '../../redux/characters/selectors'
-import styles from './charDetail.module.scss'
-
-import { getCharInfo } from "../../redux/characters/actions";
+import { selectRandomQuote, selectIsQuoteLoading} from '../../redux/quote/selectors'
+import { getQuote } from "../../redux/quote/actions";
 import ExtendedCard from "../../components/extendedCard/extendedCard";
 
-const CharDetail = ({ detailInfo, collection, id }) => {
-  console.log(detailInfo)
 
+export const CharDetail = ({ detailInfo, fetchRandomQuote, randomQuote, loadingQuote }) => {
+  useEffect(() => {
+    fetchRandomQuote(detailInfo.name.replace(" ", "+"));
+  }, [fetchRandomQuote]);
+  
   return (
     <Layout>
-      <ExtendedCard item={detailInfo} />
+      <ExtendedCard item={detailInfo} quote={randomQuote} loading={loadingQuote} />
     </Layout>
   );
 };
 
 const mapStateToProps = (state, {id}) => ({
-  // collection: state.data.characters,
   detailInfo: selectInfoCharById(state, Number(id)),
+  randomQuote: selectRandomQuote(state),
+  loadingQuote: selectIsQuoteLoading(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchCharacterStart: () => dispatch(getCharInfo()),
+  fetchRandomQuote: (name) => dispatch(getQuote(name)),
 });
 
 const CharDetailConnect = connect(mapStateToProps, mapDispatchToProps)(CharDetail);

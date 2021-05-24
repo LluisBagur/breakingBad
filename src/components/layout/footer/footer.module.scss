@@ -1,7 +1,8 @@
+@import "../../../styles/modules.scss";
+
 .root {
     width: 100%;
     height: 50px;
-    background-color: #333;
-    position: fixed;
+    background-color: $primary-color;
     bottom: 0;
 }

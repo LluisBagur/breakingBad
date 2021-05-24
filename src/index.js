@@ -1,14 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import i18next from "i18next"
-import './index.css';
+import './styles/index.scss';
 import App from './App';
-import store from './redux/store';
+import store, {history} from './redux/store';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router-dom';
 import {I18nextProvider} from "react-i18next"
 import * as serviceWorker from './serviceWorker';
-import history from './redux/history';
 
 import common_es from "./i18n/es.json"
 import common_en from "./i18n/en.json"
