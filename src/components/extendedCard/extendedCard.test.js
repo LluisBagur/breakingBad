@@ -50,7 +50,7 @@ describe("When ExtendedCard is rendered", () => {
     expect(queryByText("Alias: Heisenberg")).toBeInTheDocument();
     expect(queryByText("Representado por: Bryan Cranston")).toBeInTheDocument();
     expect(queryByText("Cumpleaños: 09-07-1958")).toBeInTheDocument();
-    expect(queryByText("No se han encontrado fases celebres")).toBeInTheDocument();
+    expect(queryByText("No se han encontrado frases celebres")).toBeInTheDocument();
     expect(queryByAltText("character")).toBeInTheDocument();
   });
   test('it should render Loading component when is Loading quote', () => {
@@ -66,7 +66,7 @@ describe("When ExtendedCard is rendered", () => {
     expect(queryByText("Alias: Heisenberg")).toBeInTheDocument();
     expect(queryByText("Representado por: Bryan Cranston")).toBeInTheDocument();
     expect(queryByText("Cumpleaños: 09-07-1958")).toBeInTheDocument();
-    expect(queryByText("No se han encontrado fases celebres")).not.toBeInTheDocument();
+    expect(queryByText("No se han encontrado frases celebres")).not.toBeInTheDocument();
     expect(queryByText("random quote")).not.toBeInTheDocument();
     expect(queryByAltText("character")).toBeInTheDocument();
     expect(queryByText("Loading")).toBeInTheDocument();

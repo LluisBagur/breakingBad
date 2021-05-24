@@ -47,7 +47,7 @@ const ExtendedCard = ({ item, quote, loading }) => {
               </div>
             ) : (
               <p className={styles.itemError}>
-                {t("No se han encontrado fases celebres")}
+                {t("No se han encontrado frases celebres")}
               </p>
             )}
           </>
