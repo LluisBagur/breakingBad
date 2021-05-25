@@ -1,6 +1,6 @@
 let store;
-
-export default {
+// eslint-disable-next-line
+export default { 
   init(configureStore) {
     store = configureStore;
   },

@@ -14,4 +14,6 @@ function* fetchQuoteByChar(action) {
     yield put(getQuoteKO(e.message));
   }
 }
-export default [takeLatest(types.FETCH_QUOTE_START, fetchQuoteByChar)];
+// export default [takeLatest(types.FETCH_QUOTE_START, fetchQuoteByChar)];
+const sagaQuote = [takeLatest(types.FETCH_QUOTE_START, fetchQuoteByChar)]
+export default sagaQuote;

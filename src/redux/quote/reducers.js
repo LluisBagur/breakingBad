@@ -25,8 +25,9 @@ const quoteReducer = (state = initialState, action) => {
         loading: false,
         error: action.errorMessage,
       };
+      default:
+        return state;
   }
-  return state;
 };
 
 export default quoteReducer;

@@ -25,8 +25,9 @@ const charReducer = (state = initialState, action) => {
         loading: false,
         error: action.errorMessage,
       };
+      default:
+        return state;
   }
-  return state;
 };
 
 export default charReducer;

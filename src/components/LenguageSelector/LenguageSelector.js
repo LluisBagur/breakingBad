@@ -5,7 +5,7 @@ import IconUK from '../../assets/images/united-kingdom.svg';
 import styles from "./lenguageSelector.module.scss";
 
 const LenguageSelector = () => {
-  const [t, i18n] = useTranslation('common');
+  const {i18n} = useTranslation('common');
 
   return (
     <div className={styles.lenguageSelector}>

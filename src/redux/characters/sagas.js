@@ -14,4 +14,6 @@ function* fetchCharInfo() {
     yield put(getCharInfoKO(e.message));
   }
 }
-export default [takeLatest(types.FETCH_CHARS_START, fetchCharInfo)];
+
+const saga = [takeLatest(types.FETCH_CHARS_START, fetchCharInfo)]
+export default saga;

@@ -11,6 +11,7 @@ import ExtendedCard from "../../components/extendedCard/extendedCard";
 export const CharDetail = ({ detailInfo, fetchRandomQuote, randomQuote, loadingQuote }) => {
   useEffect(() => {
     fetchRandomQuote(detailInfo.name.replace(" ", "+"));
+    // eslint-disable-next-line
   }, [fetchRandomQuote]);
   
   return (
